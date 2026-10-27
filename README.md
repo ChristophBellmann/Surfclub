@@ -6,12 +6,25 @@ Logo-Dateien für den Surfclub sowie ein Werkzeug, um pixelige SVG-Nachzeichnung
 
 | Datei | Beschreibung |
 |---|---|
-| `Surf-Storage Mandichosee Logo.png` | Original-Logo als Rastergrafik |
-| `Surf-Storage_Mandichosee_traced_from_render.svg` | Vektorisierte Nachzeichnung – Kanten folgen den Pixeln (treppenförmig) |
-| `Surf-Storage_Mandichosee_smooth.svg` | Geglättete Version mit echten Kurven (Ergebnis von `smooth_svg.py`) |
+| `Surf-Storage_Mandichosee.svg` | Geglättetes Logo mit echten Kurven (Ergebnis von `smooth_svg.py`) |
 | `smooth_svg.py` | Skript zum Glätten der Pfade |
 | `svg_to_stl.py` | Skript zum Erzeugen von STL-Dateien (3D-Druck) aus dem SVG |
-| `Surf-Storage_Mandichosee.stl` | 3D-Modell der schwarzen Schrift (100 mm breit, 3 mm hoch) |
+| `Surf-Storage_Mandichosee.stl` | 3D-Modell des ganzen Schriftzugs (2000 mm breit, 10 mm hoch) |
+| `Surf-Storage_Mandichosee.3mf` | Slicer-Projekt (Bambu/Orca) mit allen Teilen auf eigenen Platten |
+| `torage.stl`, `andichosee.stl` | Schriftzüge „torage“ und „andichosee“ in Endgröße |
+| `torage_teil1_tor.stl`, `torage_teil2_age.stl` | „torage“ am Rand des a geteilt |
+| `andichosee_teil1_andic.stl`, `andichosee_teil2_hosee.stl` | „andichosee“ zwischen c und h geteilt (c vollständig, h glatt) |
+| `holzschraube.stl` | Negativ-Schraube für Objekte, die im Slicer auf 54,262 % (XY) skaliert sind |
+| `holzschraube_endgroesse.stl` | Dieselbe Schraube in Endgröße (8,97 mm) für Objekte auf 100 % |
+
+## Skalierung im Slicer-Projekt
+
+Die Teile aus `Surf-Storage_Mandichosee.stl` (S, urf, S, M) sind im Projekt auf 54,262 % in X/Y skaliert, Z bleibt auf 100 %. Die geteilten Teile (tor, age, andic, hosee) sind schon in Endgröße und bleiben auf 100 %. Negativ-Teile werden mitskaliert. Deshalb gilt:
+
+- in skalierten Objekten `holzschraube.stl` verwenden,
+- in Objekten auf 100 % `holzschraube_endgroesse.stl` verwenden.
+
+In beiden Fällen ist das Schraubenloch gleich groß.
 
 ## Einrichtung
 
@@ -36,10 +49,10 @@ Ablauf pro geschlossener Kontur:
 python3 smooth_svg.py eingabe.svg ausgabe.svg
 ```
 
-Das Logo wurde so erzeugt:
+Das Logo wurde so erzeugt (die pixelige Nachzeichnung ist nicht mehr im Repo):
 
 ```bash
-python3 smooth_svg.py Surf-Storage_Mandichosee_traced_from_render.svg Surf-Storage_Mandichosee_smooth.svg
+python3 smooth_svg.py Surf-Storage_Mandichosee_traced_from_render.svg Surf-Storage_Mandichosee.svg
 ```
 
 ### Optionen
@@ -68,7 +81,7 @@ Erzeugt aus einem SVG STL-Dateien für den 3D-Druck – getrennt nach Füllfarbe
 ### Benutzung
 
 ```bash
-.venv/bin/python svg_to_stl.py Surf-Storage_Mandichosee_smooth.svg Surf-Storage_Mandichosee.stl
+.venv/bin/python svg_to_stl.py Surf-Storage_Mandichosee.svg Surf-Storage_Mandichosee.stl
 ```
 
 ### Optionen
